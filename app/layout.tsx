@@ -5,6 +5,7 @@ import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { cn } from "@/lib/utils";
 import { DottedMap } from "@/components/ui/dotted-map";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,12 +34,8 @@ export default function RootLayout({
       >
         <AnimatedThemeToggler className="fixed top-4 right-4 z-150 p-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors" />
         <div className="fixed inset-0 pointer-events-none">
-          {/* <DotPattern
-            className={cn(
-              "[mask-image:radial-gradient(60vw_60vh_at_center,white,transparent)]"
-            )}
-          /> */}
-          <DottedMap dotRadius={0.07} />
+          <DottedMap dotRadius={0.06} />
+          <BorderBeam duration={8} size={100} />
         </div>
         <div className="relative z-10">{children}</div>
       </body>
