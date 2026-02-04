@@ -120,6 +120,6 @@ You should see your site deployed to GitHub Pages in a few minutes. 🚀
 
 ## Wrap up
 
-Thanks for reading and I hope this helps. If you noticed something wrong, please [open an issue](https://github.com/gregrickaby/nextjs-github-pages/issues). Cheers! 🍻
+Thanks for reading and I hope this helps. If you noticed something wrong, please [open an issue](https://github.com/fengoa/fengoa.github.io/issues). Cheers! 🍻
 
 ---
