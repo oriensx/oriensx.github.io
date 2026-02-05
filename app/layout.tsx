@@ -6,6 +6,7 @@ import { ResponsiveDottedMap } from "@/components/ui/responsive-dotted-map";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Highlighter } from "@/components/ui/highlighter";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,11 +43,16 @@ export default function RootLayout({
           <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-background to-transparent backdrop-blur-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between h-14">
-                <Highlighter action="highlight" color="var(--color-green-400)">
-                  <span className="text-base font-medium">
-                    Fengoa&apos; Plot
-                  </span>
-                </Highlighter>
+                <Link href="/" className="hover:opacity-80 transition-opacity">
+                  <Highlighter
+                    action="highlight"
+                    color="var(--color-green-400)"
+                  >
+                    <span className="text-base font-medium">
+                      Fengoa&apos; Plot
+                    </span>
+                  </Highlighter>
+                </Link>
                 <AnimatedThemeToggler className="p-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors" />
               </div>
             </div>
