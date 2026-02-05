@@ -163,3 +163,36 @@
   writing-mode: vertical-rl;
   text-orientation: mixed;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+pre > code {
+  display: grid;
+  counter-reset: line;
+  zoom: 0.9;
+}
+
+code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 1.5rem;
+  text-align: right;
+  color: var(--muted-foreground);
+  opacity: 0.5;
+  font-size: 0.8em;
+}
+
+code:where(:not(pre) > code) {
+  padding: 0.2em 0.4em;
+  background-color: var(--secondary);
+  border-radius: 4px;
+}

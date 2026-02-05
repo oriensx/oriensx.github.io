@@ -9,7 +9,7 @@ export const H1 = (props: ComponentPropsWithoutRef<"h1">) => (
 );
 
 export const H2 = ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => {
-  const id = typeof children === "string" ? getId(children) : undefined;
+  const id = getId(children);
   return (
     <h2
       id={id}
@@ -22,7 +22,7 @@ export const H2 = ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => {
 };
 
 export const H3 = ({ children, ...props }: ComponentPropsWithoutRef<"h3">) => {
-  const id = typeof children === "string" ? getId(children) : undefined;
+  const id = getId(children);
   return (
     <h3
       id={id}
@@ -128,16 +128,16 @@ export const Blockquote = (props: ComponentPropsWithoutRef<"blockquote">) => (
   />
 );
 
-export const Pre = (props: ComponentPropsWithoutRef<"pre">) => (
+export const Pre = ({ style, ...props }: ComponentPropsWithoutRef<"pre">) => (
   <pre
-    className="mb-8 py-6 px-4 border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-auto bg-neutral-50/50 dark:bg-neutral-900/50 font-mono text-sm leading-relaxed"
+    className="mb-8 py-4 border border-neutral-200 dark:border-neutral-800 rounded-md overflow-auto bg-transparent font-mono text-sm leading-relaxed **:data-line:px-4 **:data-highlighted-line:bg-neutral-100/50 dark:**:data-highlighted-line:bg-neutral-800/50"
+    style={{ ...style, background: "transparent" }}
     {...props}
   />
 );
 
 export const Code = (props: ComponentPropsWithoutRef<"code">) => {
-  const isInline =
-    typeof props.children === "string" && !props.children.includes("\n");
+  const isInline = !props.className?.includes("language-");
   if (isInline) {
     return (
       <code
@@ -146,7 +146,7 @@ export const Code = (props: ComponentPropsWithoutRef<"code">) => {
       />
     );
   }
-  return <code {...props} />;
+  return <code className="grid min-w-full" {...props} />;
 };
 
 export const Img = ({

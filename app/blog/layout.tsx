@@ -1,6 +1,5 @@
 import React from "react";
-import Link from "next/link";
-import { Pyramid } from "lucide-react";
+import { TableOfContents } from "@/components/blog/toc";
 
 export default function BlogLayout({
   children,
@@ -9,14 +8,11 @@ export default function BlogLayout({
 }) {
   return (
     <div className="min-h-screen bg-transparent relative">
-      {/* 左侧导航栏 - 对标 abc 项目样式 */}
-      <nav className="fixed hidden lg:flex flex-col justify-end top-24 bottom-24 left-[max(2rem,calc(50%-45rem))] w-32 z-50">
-        {/* 底部保留位置，可用于后续扩展目录 */}
-        <div className="flex flex-col gap-4 text-[10px] font-bold text-neutral-400">
-          <div className="h-px w-8 bg-neutral-200 dark:bg-neutral-800" />
-          <p className="vertical-text tracking-[0.3em] uppercase opacity-80">
-            Fengoa&apos; Plot
-          </p>
+      {/* 左侧导航栏  */}
+      <nav className="absolute hidden lg:flex flex-col justify-end top-24 bottom-24 left-0 w-48 z-50">
+        {/* 目录区域 */}
+        <div className="flex-1 flex flex-col justify-end mb-8 overflow-y-auto no-scrollbar">
+          <TableOfContents />
         </div>
       </nav>
 
@@ -27,4 +23,3 @@ export default function BlogLayout({
     </div>
   );
 }
-

@@ -5,6 +5,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const getId = (text: string) => {
-  return text?.toLowerCase?.().replace(/\s/g, "-").replace(/\.|\?/g, "")
+export const getId = (children: any): string => {
+  if (!children) return "";
+  
+  const text = (node: any): string => {
+    if (typeof node === "string") return node;
+    if (typeof node === "number") return String(node);
+    if (Array.isArray(node)) return node.map(text).join("");
+    if (node?.props?.children) return text(node.props.children);
+    return "";
+  };
+
+  return text(children)
+    .toLowerCase()
+    .replace(/\s/g, "-")
+    .replace(/\.|\?/g, "")
+    .replace(/[^\w-]/g, ""); // Remove non-alphanumeric characters except hyphens
 }
