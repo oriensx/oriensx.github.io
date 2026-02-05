@@ -3,7 +3,7 @@
 import React, { forwardRef, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { AnimatedBeam } from "@/components/ui/animated-beam"
-import { User, Mail, MessageSquare, Database, Cloud, Share2, Search } from "lucide-react"
+import { User, Palette, Code2, Rocket, Figma, Paintbrush, Share2 } from "lucide-react"
 
 const Circle = forwardRef<
   HTMLDivElement,
@@ -54,24 +54,24 @@ export default function AnimatedBeamMultipleOutputDemo({
         </div>
         <div className="flex flex-col justify-center">
           <Circle ref={div6Ref} className="size-16">
-            <Share2 className="h-8 w-8 text-blue-500" />
+            <Palette className="h-8 w-8 text-pink-500" />
           </Circle>
         </div>
         <div className="flex flex-col justify-center gap-2">
           <Circle ref={div1Ref}>
-            <Mail className="h-6 w-6 text-red-500" />
+            <Code2 className="h-6 w-6 text-blue-600" title="React / Next.js" />
           </Circle>
           <Circle ref={div2Ref}>
-            <MessageSquare className="h-6 w-6 text-green-500" />
+            <Rocket className="h-6 w-6 text-green-500" title="Vue3" />
           </Circle>
           <Circle ref={div3Ref}>
-            <Database className="h-6 w-6 text-orange-500" />
+            <Figma className="h-6 w-6 text-purple-500" title="Figma" />
           </Circle>
           <Circle ref={div4Ref}>
-            <Cloud className="h-6 w-6 text-blue-400" />
+            <Paintbrush className="h-6 w-6 text-orange-400" title="Visual Design" />
           </Circle>
           <Circle ref={div5Ref}>
-            <Search className="h-6 w-6 text-gray-500" />
+            <Share2 className="h-6 w-6 text-cyan-500" title="Interaction" />
           </Circle>
         </div>
       </div>

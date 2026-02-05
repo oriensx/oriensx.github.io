@@ -8,47 +8,48 @@ import AnimatedListDemo from "@/components/demo/animated-list-demo";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { Marquee } from "@/components/ui/marquee";
 
-const files = [
+const projects = [
   {
-    name: "bitcoin.pdf",
-    body: "Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.",
+    name: "Magic UI",
+    body: "一个基于 React + Tailwind CSS 的现代 UI 组件库，专注于动画和交互体验。",
   },
   {
-    name: "finances.xlsx",
-    body: "A spreadsheet or worksheet is a file made of rows and columns that help sort data, arrange data easily, and calculate numerical data.",
+    name: "Fengoa' Blog",
+    body: "我的个人数字花园，分享技术心得、生活思考和有趣的项目实验。",
   },
   {
-    name: "logo.svg",
-    body: "Scalable Vector Graphics is an Extensible Markup Language-based vector image format for two-dimensional graphics with support for interactivity and animation.",
+    name: "VOC 分析看板",
+    body: "利用 AI 技术对用户反馈进行情感分析和关键词提取的智能化看板系统。",
   },
   {
-    name: "keys.gpg",
-    body: "GPG keys are used to encrypt and decrypt email, files, directories, and whole disk partitions and to authenticate messages.",
+    name: "Dotted Map JS",
+    body: "一个轻量级的 JavaScript 库，用于在网页上生成美观的点阵地图布局。",
   },
   {
-    name: "seed.txt",
-    body: "A seed phrase, seed recovery phrase or backup seed phrase is a list of words which store all the information needed to recover Bitcoin funds on-chain.",
+    name: "Node.js 后端脚手架",
+    body: "集成了常用中间件和标准工程化配置的 Node.js 项目启动模板。",
   },
 ];
 
 const features = [
   {
     Icon: FileTextIcon,
-    name: "Save your files",
-    description: "We automatically save your files as you type.",
+    name: "实验室 & 玩具",
+    description:
+      "在这个数字地块里，存放着我对交互探索的各种实验性小工具与 UI 构思。",
     href: "#",
-    cta: "Learn more",
+    cta: "推开门看看",
     className: "col-span-3 lg:col-span-1",
     background: (
       <Marquee
         pauseOnHover
         className="absolute top-10 [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] [--duration:20s]"
       >
-        {files.map((f, idx) => (
+        {projects.map((p, idx) => (
           <figure
             key={idx}
             className={cn(
-              "relative w-32 cursor-pointer overflow-hidden rounded-xl border p-4",
+              "relative w-48 cursor-pointer overflow-hidden rounded-xl border p-4",
               "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
               "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
               "transform-gpu blur-[1px] transition-all duration-300 ease-out hover:blur-none"
@@ -57,11 +58,13 @@ const features = [
             <div className="flex flex-row items-center gap-2">
               <div className="flex flex-col">
                 <figcaption className="text-sm font-medium dark:text-white">
-                  {f.name}
+                  {p.name}
                 </figcaption>
               </div>
             </div>
-            <blockquote className="mt-2 text-xs">{f.body}</blockquote>
+            <blockquote className="mt-2 text-xs leading-relaxed">
+              {p.body}
+            </blockquote>
           </figure>
         ))}
       </Marquee>
@@ -69,10 +72,11 @@ const features = [
   },
   {
     Icon: BellIcon,
-    name: "Notifications",
-    description: "Get notified when something happens.",
+    name: "动态日志",
+    description:
+      "保持好奇，保持产出。这里记录了我作为 UX Engineer 的成长轨迹与思考碎片。",
     href: "#",
-    cta: "Learn more",
+    cta: "浏览日志",
     className: "col-span-3 lg:col-span-2",
     background: (
       <AnimatedListDemo className="absolute top-4 right-2 h-[300px] w-full scale-75 border-none [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90" />
@@ -80,10 +84,11 @@ const features = [
   },
   {
     Icon: Share2Icon,
-    name: "Integrations",
-    description: "Supports 100+ integrations and counting.",
+    name: "核心天职",
+    description:
+      "用户体验工程师。对视觉高度敏感，精通 React/Next.js/Vue3 及 Figma。致力于在像素与代码间寻找平衡。",
     href: "#",
-    cta: "Learn more",
+    cta: "查看能力清单",
     className: "col-span-3 lg:col-span-2",
     background: (
       <AnimatedBeamMultipleOutputDemo className="absolute top-4 right-2 h-[300px] border-none [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-105" />
@@ -91,15 +96,16 @@ const features = [
   },
   {
     Icon: CalendarIcon,
-    name: "Calendar",
-    description: "Use the calendar to filter your files by date.",
+    name: "时间坐标",
+    description:
+      "数字花园的索引。回溯那些关于代码、设计与生活的每一个关键时刻。",
     className: "col-span-3 lg:col-span-1",
     href: "#",
-    cta: "Learn more",
+    cta: "回溯时光",
     background: (
       <Calendar
         mode="single"
-        selected={new Date(2022, 4, 11, 0, 0, 0)}
+        selected={new Date()}
         className="absolute top-10 right-0 origin-top scale-75 rounded-md border [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90"
       />
     ),
@@ -108,12 +114,23 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-center">
-      <BentoGrid>
-        {features.map((feature, idx) => (
-          <BentoCard key={idx} {...feature} />
-        ))}
-      </BentoGrid>
+    <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      {/* Hero Section */}
+      <div className="flex flex-col items-center mb-12 text-center">
+        <p className="text-xl text-muted-foreground hover:text-secondary-foreground transition-colors max-w-2xl">
+          让<span className="font-medium mx-1">优雅的视觉</span>与
+          <span className="font-medium mx-1">极致的交互</span>
+          触手可及。
+        </p>
+      </div>
+
+      <div className="flex justify-center">
+        <BentoGrid>
+          {features.map((feature, idx) => (
+            <BentoCard key={idx} {...feature} />
+          ))}
+        </BentoGrid>
+      </div>
     </main>
   );
 }
