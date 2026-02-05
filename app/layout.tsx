@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
-import { DottedMap } from "@/components/ui/dotted-map";
-import { BorderBeam } from "@/components/ui/border-beam";
+import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
+import { ResponsiveDottedMap } from "@/components/magicui/responsive-dotted-map";
+import { BorderBeam } from "@/components/magicui/border-beam";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,7 +43,7 @@ export default function RootLayout({
         </nav>
         <div className="fixed inset-px pointer-events-none">
           <div className="absolute left-0 right-0 top-14">
-            <DottedMap dotRadius={0.06} />
+            <ResponsiveDottedMap />
           </div>
           <BorderBeam duration={8} size={100} />
         </div>
