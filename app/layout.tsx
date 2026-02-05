@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler";
-import { ResponsiveDottedMap } from "@/components/magicui/responsive-dotted-map";
-import { BorderBeam } from "@/components/magicui/border-beam";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import { ResponsiveDottedMap } from "@/components/ui/responsive-dotted-map";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
         {/* 导航栏 */}
-        <nav className="fixed top-0 left-0 right-0 z-50">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-background to-transparent backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-14">
               <h1 className="text-lg font-semibold tracking-tight">
@@ -41,13 +41,13 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        <div className="fixed inset-px pointer-events-none">
-          <div className="absolute left-0 right-0 top-14">
-            <ResponsiveDottedMap />
-          </div>
+        <div className="fixed left-0 right-0 top-14">
+          <ResponsiveDottedMap />
+        </div>
+        <div className="fixed inset-px pointer-events-none z-50">
           <BorderBeam duration={8} size={100} />
         </div>
-        <div className="relative z-10 pt-14">{children}</div>
+        <div className="relative pt-14">{children}</div>
       </body>
     </html>
   );

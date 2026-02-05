@@ -1,65 +1,119 @@
-import Image from "next/image";
+import { CalendarIcon, FileTextIcon } from "@radix-ui/react-icons";
+import { BellIcon, Share2Icon } from "lucide-react";
+
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import AnimatedBeamMultipleOutputDemo from "@/components/demo/animated-beam-demo";
+import AnimatedListDemo from "@/components/demo/animated-list-demo";
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
+import { Marquee } from "@/components/ui/marquee";
+
+const files = [
+  {
+    name: "bitcoin.pdf",
+    body: "Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.",
+  },
+  {
+    name: "finances.xlsx",
+    body: "A spreadsheet or worksheet is a file made of rows and columns that help sort data, arrange data easily, and calculate numerical data.",
+  },
+  {
+    name: "logo.svg",
+    body: "Scalable Vector Graphics is an Extensible Markup Language-based vector image format for two-dimensional graphics with support for interactivity and animation.",
+  },
+  {
+    name: "keys.gpg",
+    body: "GPG keys are used to encrypt and decrypt email, files, directories, and whole disk partitions and to authenticate messages.",
+  },
+  {
+    name: "seed.txt",
+    body: "A seed phrase, seed recovery phrase or backup seed phrase is a list of words which store all the information needed to recover Bitcoin funds on-chain.",
+  },
+];
+
+const features = [
+  {
+    Icon: FileTextIcon,
+    name: "Save your files",
+    description: "We automatically save your files as you type.",
+    href: "#",
+    cta: "Learn more",
+    className: "col-span-3 lg:col-span-1",
+    background: (
+      <Marquee
+        pauseOnHover
+        className="absolute top-10 [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] [--duration:20s]"
+      >
+        {files.map((f, idx) => (
+          <figure
+            key={idx}
+            className={cn(
+              "relative w-32 cursor-pointer overflow-hidden rounded-xl border p-4",
+              "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+              "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+              "transform-gpu blur-[1px] transition-all duration-300 ease-out hover:blur-none"
+            )}
+          >
+            <div className="flex flex-row items-center gap-2">
+              <div className="flex flex-col">
+                <figcaption className="text-sm font-medium dark:text-white">
+                  {f.name}
+                </figcaption>
+              </div>
+            </div>
+            <blockquote className="mt-2 text-xs">{f.body}</blockquote>
+          </figure>
+        ))}
+      </Marquee>
+    ),
+  },
+  {
+    Icon: BellIcon,
+    name: "Notifications",
+    description: "Get notified when something happens.",
+    href: "#",
+    cta: "Learn more",
+    className: "col-span-3 lg:col-span-2",
+    background: (
+      <AnimatedListDemo className="absolute top-4 right-2 h-[300px] w-full scale-75 border-none [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90" />
+    ),
+  },
+  {
+    Icon: Share2Icon,
+    name: "Integrations",
+    description: "Supports 100+ integrations and counting.",
+    href: "#",
+    cta: "Learn more",
+    className: "col-span-3 lg:col-span-2",
+    background: (
+      <AnimatedBeamMultipleOutputDemo className="absolute top-4 right-2 h-[300px] border-none [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-105" />
+    ),
+  },
+  {
+    Icon: CalendarIcon,
+    name: "Calendar",
+    description: "Use the calendar to filter your files by date.",
+    className: "col-span-3 lg:col-span-1",
+    href: "#",
+    cta: "Learn more",
+    background: (
+      <Calendar
+        mode="single"
+        selected={new Date(2022, 4, 11, 0, 0, 0)}
+        className="absolute top-10 right-0 origin-top scale-75 rounded-md border [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90"
+      />
+    ),
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      {/* <main className="flex w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main> */}
-    </div>
+    <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-center">
+      <BentoGrid>
+        {features.map((feature, idx) => (
+          <BentoCard key={idx} {...feature} />
+        ))}
+      </BentoGrid>
+    </main>
   );
 }
