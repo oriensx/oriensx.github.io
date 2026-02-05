@@ -75,7 +75,7 @@ const features = [
     name: "动态日志",
     description:
       "保持好奇，保持产出。这里记录了我作为 UX Engineer 的成长轨迹与思考碎片。",
-    href: "#",
+    href: "/blog/hello-world",
     cta: "浏览日志",
     className: "col-span-3 lg:col-span-2",
     background: (

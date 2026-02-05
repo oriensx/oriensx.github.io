@@ -159,3 +159,7 @@
 ::view-transition-new(root) {
   z-index: 999;
 }
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}

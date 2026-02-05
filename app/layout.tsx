@@ -7,6 +7,8 @@ import { BorderBeam } from "@/components/ui/border-beam";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Highlighter } from "@/components/ui/highlighter";
 import Link from "next/link";
+import { DotPattern } from "@/components/ui/dot-pattern";
+import { cn } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,8 +59,12 @@ export default function RootLayout({
               </div>
             </div>
           </nav>
-          <div className="fixed left-0 right-0 top-14">
-            <ResponsiveDottedMap />
+          <div className="fixed inset-0">
+            <DotPattern
+              className={cn(
+                "[mask-image:radial-gradient(50vw_circle_at_center,white,transparent)]"
+              )}
+            />
           </div>
           <div className="fixed inset-px pointer-events-none z-50">
             <BorderBeam duration={8} size={100} />

@@ -1,0 +1,63 @@
+import { Calendar, Signature, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+
+export const metadata = {
+  title: "Hello World: 我的第一篇数字花园日志",
+  date: "2026-02-05",
+  author: "Fengoa",
+  description: "探索 UX Engineer 的像素与代码之路。",
+};
+
+<div className="mb-12">
+  <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group">
+    <ArrowLeft className="mr-2 size-4 transition-transform group-hover:-translate-x-1" />
+    返回主页
+  </Link>
+  
+  <div className="flex flex-wrap gap-x-6 gap-y-2 mb-6 font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-widest">
+    <span className="flex items-center gap-1.5">
+      <Calendar className="size-3.5" />
+      <span>{metadata.date}</span>
+    </span>
+    <span className="flex items-center gap-1.5">
+      <Signature className="size-3.5" />
+      <span>{metadata.author}</span>
+    </span>
+  </div>
+  
+  <H1>{metadata.title}</H1>
+</div>
+
+欢迎来到我的数字花园。这不仅是一个博客，更是一个**“地块” (Plot)**，记录着我在用户体验、视觉设计与前端工程化之间的探索。
+
+## 为什么是数字花园？
+
+传统的博客往往是线性的、完成的作品集。而数字花园更像是：
+- **生长的**: 持续更新，而非发布后就一成不变。
+- **关联的**: 内容之间通过知识网络相互连接。
+- **真实的**: 记录思考的过程，而不仅仅是结果。
+
+<Highlighter color="var(--color-green-400)">
+作为一名用户体验工程师，我坚信交互的本质是情感的传递。
+</Highlighter>
+
+## 示例代码
+
+在我的开发过程中，我经常会用到一些极简的组件封装。例如这个简单的 `cn` 工具函数：
+
+```typescript
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+```
+
+## 接下来要做什么？
+
+1. 完善 MDX 的渲染组件。
+2. 增加文章分类与标签系统。
+3. 接入更多交互式的 Magic UI 组件到文章中。
+
+感谢你的阅读，愿我们在像素的海洋里相遇。
