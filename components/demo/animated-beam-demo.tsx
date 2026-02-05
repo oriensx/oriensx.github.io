@@ -59,19 +59,19 @@ export default function AnimatedBeamMultipleOutputDemo({
         </div>
         <div className="flex flex-col justify-center gap-2">
           <Circle ref={div1Ref}>
-            <Code2 className="h-6 w-6 text-blue-600" title="React / Next.js" />
+            <Code2 className="h-6 w-6 text-blue-600" />
           </Circle>
           <Circle ref={div2Ref}>
-            <Rocket className="h-6 w-6 text-green-500" title="Vue3" />
+            <Rocket className="h-6 w-6 text-green-500" />
           </Circle>
           <Circle ref={div3Ref}>
-            <Figma className="h-6 w-6 text-purple-500" title="Figma" />
+            <Figma className="h-6 w-6 text-purple-500" />
           </Circle>
           <Circle ref={div4Ref}>
-            <Paintbrush className="h-6 w-6 text-orange-400" title="Visual Design" />
+            <Paintbrush className="h-6 w-6 text-orange-400" />
           </Circle>
           <Circle ref={div5Ref}>
-            <Share2 className="h-6 w-6 text-cyan-500" title="Interaction" />
+            <Share2 className="h-6 w-6 text-cyan-500" />
           </Circle>
         </div>
       </div>
