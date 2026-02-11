@@ -40,15 +40,9 @@ export function PostCard({ post, index }: { post: PostData; index: number }) {
           <div>
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-4 font-mono text-xs text-muted-foreground tracking-wide">
               <span className="inline-flex items-center gap-1.5">
-                <Calendar className="size-3" />
+                <Calendar className="size-3 -mt-px" />
                 {formatDate(post.date)}
               </span>
-              {post.author && (
-                <span className="inline-flex items-center gap-1.5">
-                  <User className="size-3" />
-                  {post.author}
-                </span>
-              )}
             </div>
 
             <h2 className="text-xl sm:text-2xl font-bold leading-tight tracking-tight text-foreground mb-3">

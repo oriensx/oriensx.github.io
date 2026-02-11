@@ -12,7 +12,7 @@ export function PostList({ posts }: { posts: PostData[] }) {
         duration: 0.6,
       }}
       enableHover
-      className="rounded-lg bg-white/10 dark:bg-black/10"
+      className="rounded-lg bg-black/4 dark:bg-white/4"
     >
       {posts.map((post, index) => (
         <div key={post.slug} data-id={post.slug}>
