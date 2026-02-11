@@ -5,8 +5,6 @@ import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { ThemeProvider } from "@/components/theme-provider";
 import Link from "next/link";
-import { DotPattern } from "@/components/ui/dot-pattern";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const geistSans = Geist({
@@ -30,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="zh" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative min-h-screen`}
       >
@@ -61,15 +59,9 @@ export default function RootLayout({
               </div>
             </div>
           </nav>
-          <div className="fixed inset-0">
-            <DotPattern
-              className={cn(
-                "mask-[radial-gradient(50vw_circle_at_center,white,transparent)]"
-              )}
-            />
-          </div>
-          <div className="fixed inset-px pointer-events-none z-50">
-            <BorderBeam duration={8} size={100} />
+          <div className="fixed inset-0"></div>
+          <div className="fixed inset-px -top-px pointer-events-none z-50">
+            <BorderBeam duration={80} size={100} />
           </div>
           <div className="relative pt-14">{children}</div>
         </ThemeProvider>

@@ -1,8 +1,6 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
-import { Highlighter } from "@/components/ui/highlighter";
 import { getId } from "@/lib/utils";
-import Image, { ImageProps } from "next/image";
 
 export const H1 = (props: ComponentPropsWithoutRef<"h1">) => (
   <h1 className="mb-8 font-semibold text-2xl md:text-4xl" {...props} />
@@ -35,10 +33,7 @@ export const H3 = ({ children, ...props }: ComponentPropsWithoutRef<"h3">) => {
 };
 
 export const P = (props: ComponentPropsWithoutRef<"p">) => (
-  <p
-    className="mb-4 last:mb-0 leading-relaxed text-foreground/80"
-    {...props}
-  />
+  <p className="mb-4 last:mb-0 leading-relaxed text-foreground/80" {...props} />
 );
 
 export const A = ({
@@ -201,7 +196,6 @@ export const components = {
   Img: Img,
   hr: Hr,
   Hr: Hr,
-  Highlighter,
 };
 
 export function useMDXComponents(currentComponents: any) {
