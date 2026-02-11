@@ -14,7 +14,7 @@ const projects = [
     body: "一个基于 React + Tailwind CSS 的现代 UI 组件库，专注于动画和交互体验。",
   },
   {
-    name: "Fengoa' Blog",
+    name: "向东Oriens",
     body: "我的个人数字花园，分享技术心得、生活思考和有趣的项目实验。",
   },
   {
@@ -50,8 +50,8 @@ const features = [
             key={idx}
             className={cn(
               "relative w-48 cursor-pointer overflow-hidden rounded-xl border p-4",
-              "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-              "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+              "border-gray-950/10 bg-gray-950/1 hover:bg-gray-950/5",
+              "dark:border-gray-50/10 dark:bg-gray-50/10 dark:hover:bg-gray-50/15",
               "transform-gpu blur-[1px] transition-all duration-300 ease-out hover:blur-none"
             )}
           >

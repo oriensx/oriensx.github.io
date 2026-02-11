@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
-import { useCallback, useEffect, useRef, useState } from "react"
-import { Moon, Sun } from "lucide-react"
-import { flushSync } from "react-dom"
-import { useTheme } from "next-themes"
+import { useCallback, useRef } from "react";
+import { Moon, Sun } from "lucide-react";
+import { flushSync } from "react-dom";
+import { useTheme } from "next-themes";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-interface AnimatedThemeTogglerProps extends React.ComponentPropsWithoutRef<"button"> {
-  duration?: number
+interface AnimatedThemeTogglerProps
+  extends React.ComponentPropsWithoutRef<"button"> {
+  duration?: number;
 }
 
 export const AnimatedThemeToggler = ({
@@ -16,41 +17,34 @@ export const AnimatedThemeToggler = ({
   duration = 400,
   ...props
 }: AnimatedThemeTogglerProps) => {
-  const { theme, setTheme, resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  const buttonRef = useRef<HTMLButtonElement>(null)
-
-  // 确保在客户端挂载后再渲染，避免水合不匹配
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true)
-  }, [])
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const toggleTheme = useCallback(async () => {
-    if (!buttonRef.current) return
+    if (!buttonRef.current) return;
 
     const updateThemeState = () => {
-      setTheme(resolvedTheme === "dark" ? "light" : "dark")
-    }
+      setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    };
 
     // 检查浏览器是否支持 View Transitions API
     if (!document.startViewTransition) {
-      updateThemeState()
-      return
+      updateThemeState();
+      return;
     }
 
     await document.startViewTransition(() => {
-      flushSync(updateThemeState)
-    }).ready
+      flushSync(updateThemeState);
+    }).ready;
 
     const { top, left, width, height } =
-      buttonRef.current.getBoundingClientRect()
-    const x = left + width / 2
-    const y = top + height / 2
+      buttonRef.current.getBoundingClientRect();
+    const x = left + width / 2;
+    const y = top + height / 2;
     const maxRadius = Math.hypot(
       Math.max(left, window.innerWidth - left),
       Math.max(top, window.innerHeight - top)
-    )
+    );
 
     document.documentElement.animate(
       {
@@ -64,31 +58,23 @@ export const AnimatedThemeToggler = ({
         easing: "ease-in-out",
         pseudoElement: "::view-transition-new(root)",
       }
-    )
-  }, [resolvedTheme, setTheme, duration])
+    );
+  }, [resolvedTheme, setTheme, duration]);
 
-  if (!mounted) {
-    return (
-      <button
-        className={cn(className, "opacity-0")}
-        {...props}
-      >
-        <Moon />
-      </button>
-    )
-  }
-
-  const isDark = resolvedTheme === "dark"
+  const isDark = resolvedTheme === "dark";
 
   return (
     <button
       ref={buttonRef}
       onClick={toggleTheme}
-      className={cn(className)}
+      className={cn(
+        "hover:opacity-80 transition-opacity cursor-pointer",
+        className
+      )}
       {...props}
     >
       {isDark ? <Sun /> : <Moon />}
       <span className="sr-only">Toggle theme</span>
     </button>
-  )
-}
+  );
+};
