@@ -112,18 +112,16 @@ export default function RootLayout({
               ))}
             </Dock>
           </div>
-          <div className="relative pt-14 pb-32 min-h-screen">
+          <div className="relative pt-14 pb-32 min-h-screen mx-auto px-4 md:px-16 max-w-272">
             {children}
-            <footer className="mx-auto px-4 md:px-16 max-w-272">
-              <div className="border-t w-full py-4">
-                <TextLoop
-                  interval={6}
-                  className="text-xs text-muted-foreground overflow-hidden"
-                >
-                  <span>© {new Date().getFullYear()} Oriens.</span>
-                  <span>Be quiet.</span>
-                </TextLoop>
-              </div>
+            <footer className="border-t w-full py-4">
+              <TextLoop
+                interval={6}
+                className="text-xs text-muted-foreground overflow-hidden"
+              >
+                <span>© {new Date().getFullYear()} Oriens.</span>
+                <span>Be quiet.</span>
+              </TextLoop>
             </footer>
           </div>
         </ThemeProvider>
