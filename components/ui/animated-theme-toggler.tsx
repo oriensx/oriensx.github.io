@@ -68,7 +68,7 @@ export const AnimatedThemeToggler = ({
       ref={buttonRef}
       onClick={toggleTheme}
       className={cn(
-        "hover:opacity-80 transition-opacity cursor-pointer",
+        "text-muted-foreground hover:text-primary transition-all duration-300 cursor-pointer",
         className
       )}
       {...props}
