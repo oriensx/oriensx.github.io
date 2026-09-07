@@ -375,9 +375,11 @@ tags: 创业公司, 目录, 多智能体, 开源
 url: https://startupwiki.tech/
 ---
 
-# StartupWiki：用多智能体现写的创业公司档案库
+# StartupWiki：由多智能体现场生成的创业公司档案库
 
-首页长得像 Google，实际是创业公司档案库，想做成能公开读的 Crunchbase。作者 Pranesh。点 Suggest 之后，Gemini 多智能体大约 15 秒现写整份档案。公开材料不够时，模型会补上「看起来真实」的融资和时间线。覆盖还很薄，AI 分类大约 9 家。数字要对照一手材料。
+作者 Pranesh，目标是做一个公开可读的 Crunchbase。首页只有一个搜索框，形式接近 Google。点击 Suggest 之后，Gemini 多智能体在大约 15 秒内生成整份公司档案。
+
+公开材料不足时，模型会补出看起来真实的融资金额与时间线。目前收录量很少，AI 分类下大约 9 家。其中的数字需要对照一手材料核实。
 
 ![StartupWiki：Google 式首页与创业公司目录](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788144329897.png)
 
@@ -389,11 +391,11 @@ tags: 创业点子, 调研, 独立开发, 验证
 url: https://1mil.app
 ---
 
-# 1mil.app：按你的背景扫描有证据的生意方向
+# 1mil.app：按个人背景检索有依据的生意方向
 
-Eli Fayerman 的点子扫描器。填你熟悉什么、擅长什么，它上网搜一圈，给出大约 10 个带竞品和定价锚点的方向。登录后第一次免费。
+Eli Fayerman 做的点子扫描工具。填写自己熟悉的领域与擅长的技能之后，它会联网检索，输出大约 10 个方向，每个方向附带竞品与定价参考。登录后第一次免费。
 
-站点不公开整包目录。作者自己扫了三百多次、大约 3400 条，没放出来。想翻现成库可以去 Ideabrowser 一类产品。
+站点不提供完整目录。作者本人扫描过三百多次、累计约 3400 条结果，没有公开。需要现成的点子库可以看 Ideabrowser 这类产品。
 
 ![1mil.app：按背景扫描创业点子](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788144692464.png)
 
@@ -407,7 +409,7 @@ url: https://usenuzzle.com
 
 # Nuzzle：把宠物照片做成锁屏上的动态插画壁纸
 
-13001r 的 iOS 应用。选一张宠物照片、挑一种插画风格，做成锁屏上的动态壁纸。播放用 Live Photo，需要 iOS 17 及以上。App Store 可下。
+13001r 开发的 iOS 应用。选择一张宠物照片，指定插画风格，生成锁屏上的动态壁纸，播放依赖 Live Photo。要求 iOS 17 及以上，App Store 可以下载。
 
 ![Nuzzle：宠物动态插画锁屏壁纸](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788145173615.png)
 
@@ -419,9 +421,11 @@ tags: 竞品, 销售线索, SaaS, 情报
 url: https://anvendor.com/
 ---
 
-# anVendor：查对手的客户，以及他们大概花多少钱
+# anVendor：查询竞争对手的客户与大致支出
 
-ia_soul 做的竞品客户情报站。输入对手或某个 SaaS，列出谁在付钱、大概一年花多少；反过来输入域名，看这家公司订了哪些服务。大约 700 种 SaaS。花费按公开价目表估下限。搜索免费，揭开一条客户花 0.25 信用。
+ia_soul 做的竞品客户情报站。输入竞争对手或某个 SaaS 名称，它列出正在付费的客户以及各自的年度支出估算。输入域名可以反查这家公司订阅了哪些服务。目前覆盖大约 700 种 SaaS。
+
+支出依据公开价目表估算，结果偏保守。搜索免费，查看单条客户记录消耗 0.25 信用。
 
 ![anVendor：查对手客户与估算花费](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788145341549.png)
 
@@ -435,8 +439,8 @@ url: https://umer9538.github.io/underfoot/
 
 # Underfoot：系统更新在设备端模型上改了什么
 
-Umer2521 的观测站。系统更新会替换手机里的设备端模型，没有 changelog。Underfoot 冻结 28 条提示词，对每个 OS 构建抓一遍回答，把差异公开。旧系统一被覆盖，那一版就测不了了。
+Umer2521 做的观测站。系统更新会替换设备上的端侧模型，官方不提供变更说明。Underfoot 固定 28 条提示词，在每个系统构建上重新采集回答，公开前后差异。旧系统一旦被覆盖，该版本就无法再次测试。
 
-现在的基线：macOS 26.5.1 上 140 次回答完全相同。iOS 模拟器报模型可用，生成却全部失败。同一条市政会议摘要，新框架放行，旧框架以不安全为由拒绝。仓库在 GitHub（Umer9538/underfoot）。
+当前的基线结果有三项。macOS 26.5.1 上 140 次回答完全相同。iOS 模拟器报告模型可用，实际生成全部失败。同一条市政会议摘要请求，新框架允许输出，旧框架以内容不安全为由拒绝。仓库地址为 GitHub 上的 Umer9538/underfoot。
 
 ![Underfoot：设备端模型随系统更新的漂移观测](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788145524298.png)
