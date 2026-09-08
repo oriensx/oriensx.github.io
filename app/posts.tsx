@@ -45,8 +45,19 @@ import { DeepSeekCover } from "./blog/deepseek-interview/cover";
 import { AeoGoosePracticeCover } from "./blog/aeo-goose-practice/cover";
 import { ApplePictureHeroCover } from "./blog/apple-picture-hero/cover";
 import { Expectimax2048Cover } from "./blog/2048-expectimax/cover";
+import { DogLanguageModelCover } from "./blog/dog-language-model/cover";
 
 export const posts: PostData[] = [
+  {
+    slug: "dog-language-model",
+    title: "从狗叫声到双向狗语模型：先建 Dog Semantic Space",
+    date: "2026-09-08",
+    tag: "大模型",
+    summary:
+      "用 DogSpeak / Dog2vec 做声学底座，以结构化语义空间对齐 CLAP 与条件生成；分四阶段落地 Dog→Human 与 Human→Dog。",
+    cover: <DogLanguageModelCover />,
+    coverShape: "circle",
+  },
   {
     slug: "2048-expectimax",
     title: "给 2048 写一个 Expectimax bot",
