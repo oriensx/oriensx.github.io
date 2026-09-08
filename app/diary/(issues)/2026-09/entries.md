@@ -1,4 +1,20 @@
 ---
+id: perlerbeads-pattern-maker
+date: 2026-09-08
+time: 10:14
+tags: 拼豆, 熔珠, 图案, 打印
+url: https://perlerbeads.net
+---
+
+# 免费拼豆图案生成：照片转可打印模板
+
+作者 taylorzhuzhu。上传照片后按 Perler、Hama、Artkal 色板自动对色，网格可调到 10×10 到 100×100，并给出各色用量。支持画笔、填充与撤销，导出 PNG 或带材料清单的 PDF。无需注册。同一张图也可以转成十字绣图纸。
+
+![拼豆图案生成：上传照片](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788833564476.png)
+
+![拼豆图案生成：可打印模板](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788833631084.png)
+
+---
 id: nationaldex
 date: 2026-09-07
 time: 10:17
