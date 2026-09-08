@@ -50,11 +50,11 @@ import { DogLanguageModelCover } from "./blog/dog-language-model/cover";
 export const posts: PostData[] = [
   {
     slug: "dog-language-model",
-    title: "从狗叫声到双向狗语模型：先建 Dog Semantic Space",
+    title: "从狗叫声到狗语翻译：构建一个双向 Dog Language Model",
     date: "2026-09-08",
     tag: "大模型",
     summary:
-      "用 DogSpeak / Dog2vec 做声学底座，以结构化语义空间对齐 CLAP 与条件生成；分四阶段落地 Dog→Human 与 Human→Dog。",
+      "以 Dog Semantic Space 为中枢，串联 DogSpeak / Dog2vec 声学预训练、CLAP 音文对齐与 AudioLDM 条件生成，分四阶段落地 Dog↔Human。",
     cover: <DogLanguageModelCover />,
     coverShape: "circle",
   },
