@@ -1,4 +1,32 @@
 ---
+id: relativity-park
+date: 2026-09-10
+time: 17:19
+tags: 相对论, 科普, 可视化
+url: https://rivendell.dmitrybrant.com/relativity/
+---
+
+# Relativity Park：光速压到 5 km/h 的公园
+
+作者 Dmitry Brant。把光速设成快走的速度，公园里一加速就能看见长度收缩、时间膨胀、前方蓝移和后方红移。方向键加速，空格停下。路灯按世界时一秒闪一次，摩天轮和穿梭车开到 0.75c。公式没看懂，画面倒是直接。
+
+![Relativity Park：光速 5 km/h 的公园](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1789031456474.png)
+
+---
+id: vertumnus
+date: 2026-09-08
+time: 17:05
+tags: 时令, 农产品, 海报, 打印
+url: https://vertumnus.fyi
+---
+
+# Vertumnus：农夫市集时令农产品海报
+
+作者 perspectivezoom。按地区生成可打印的时令图，粒度到周。目前只有旧金山湾区和纽约两地，作物可自行勾选，插画来自 USDA 果蔬水彩档案。湾区用周边产地的发货量推高峰与上市区间，纽约直接套州农业部的收获表。
+
+![Vertumnus：可打印时令农产品海报](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1788858293931.png)
+
+---
 id: perlerbeads-pattern-maker
 date: 2026-09-08
 time: 10:14
