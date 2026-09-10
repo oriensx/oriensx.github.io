@@ -18,7 +18,7 @@ Human Language → Dog Audio
 
 但真正实现这个目标，并不是简单地训练一个“狗叫声 → 中文”的模型。
 
-因为目前并不存在一个已经被证明的、类似英语、中文这样的“狗语词典”。狗叫声和情绪、唤醒程度、环境、行为、个体差异之间存在复杂关系。
+因为目前并不存在一个已经被证明的、类似英语、中文这样的“狗语词典”。狗叫声和情绪、唤醒程度、环境、行为、个体差异之间存在复杂关系。现有生物声学研究也普遍倾向于：动物发声更接近连续的情绪 / 唤醒度调制信号，而不是像人类语言那样稳定的离散符号系统。
 
 因此，更合理的技术路线是：
 
@@ -49,6 +49,8 @@ Dog Audio Generator
 ```
 
 真正需要建立的，是中间这个 **Dog Semantic Space**。
+
+这条判断和跨物种沟通研究里的主流路径一致——Earth Species Project、CETI 鲸鱼项目等，也都是先建可验证的中间表示，再讨论“翻译”。产品叙事可以叫翻译器；工程上要建的是语义中间层。
 
 ---
 
@@ -102,7 +104,7 @@ Natural Language
 
 这里我们已经有一个非常好的起点：**DogSpeak Dataset**。
 
-DogSpeak 是 2025 年发布的大规模犬类声音数据集，包含 77,202 个 Barkseq，来自 156 只狗、5 个品种，总时长约 33.2 小时，而且数据来自 YouTube、TikTok 等真实环境中的视频，而不是实验室里的受控录音。
+DogSpeak 是 2025 年发布的大规模犬类声音数据集，包含 77,202 个 Barkseq，来自 156 只狗、5 个品种，总时长约 33.2 小时，而且数据来自 YouTube、TikTok 等真实环境中的视频，而不是实验室里的受控录音。Hugging Face 上可直接获取。
 
 它的价值不在于它直接告诉我们：
 
@@ -130,13 +132,15 @@ Dog Audio Representation
 
 更有意思的是，这条路线已经有人开始验证。
 
-2025 年的 Dog2vec 工作专门研究了：
+2025 年的 Dog2vec 工作（Interspeech 2025，Xingyuan Li / Kenny Zhu / Mengyue Wu）专门研究了：
 
 > Self-Supervised Pre-Training for Canine Vocal Representation。
 
 研究者收集了超过 **6000 小时**的狗叫视频，并训练了一个面向犬类声音的自监督表示模型。
 
 论文报告显示，Dog2vec 在狗叫类型识别、狗声音事件检测等任务上优于通用的、跨物种的生物声学模型，并获得约 **8.2% 的相对性能提升**。
+
+同一团队（UTA Kenny Zhu 等）在 2025 年也公开推进狗叫的音素 / 词级模式发现，思路和本文高度一致：先找可复现的声学单元与模式，再谈语义。这说明犬类专用声学底座不是空想，已有真实研究团队在推进。
 
 这给我们的架构提供了一个非常重要的启发：
 
@@ -157,6 +161,8 @@ Dog Audio Encoder
 ```
 
 DogSpeak 官方也明确把 Audio Representation Learning 和 Bioacoustic Foundation Model Pretraining 列为其推荐用途。
+
+需要把期望校准一下：Dog2vec 的 baseline 是跨物种通用模型，**8.2% 的相对提升不算特别大**。它证明“狗专属预训练有正向收益”，还不足以单独支撑整条产品架构。更稳妥的读法是：犬类专用 Encoder 值得做，同时要准备通用音频大模型冷启动、少样本适配等备选路径。
 
 ---
 
@@ -203,6 +209,8 @@ Dog Audio Embedding
 ```
 
 甚至可以进一步研究 Dog2vec 这种已经针对犬类声音优化过的模型，而不是从 BEATs 从零开始。
+
+生物声学基础模型这条线上，还值得直接对标 **Earth Species Project 的 NatureLM-audio**：大规模跨物种预训练，再做下游少样本适配。它和本文第一阶段的思路几乎同构，技术报告比只参考通用 audio SSL（如 BEATs）更贴近“动物沟通”这个产品语境。
 
 ---
 
@@ -288,6 +296,20 @@ Dog Audio
 
 这样，“狗语”第一次开始和人类语言进入同一个语义空间。
 
+2025 年之后，跨模态对齐不必默认从零训一个狗专属 CLAP。**Qwen2-Audio、SALMONN、Audio Flamingo 2** 这类通用音频–语言大模型，已经具备较强的 zero-shot 声学–语言对齐能力。更现代、也更省数据和算力的做法是：
+
+```text
+通用 Audio-Language Model
+        ↓
+冷启动特征 / 伪标签
+        ↓
+少量狗专属数据 + LoRA / 领域微调
+        ↓
+Dog-adapted Alignment
+```
+
+从头训狗专属对比模型仍然可行，适合作为对照实验；产品冷启动优先复用通用模型，再用 DogSpeak 与自建语义数据做适配。
+
 ---
 
 ## 六、但这里有一个数据问题：DogSpeak 不够
@@ -354,6 +376,8 @@ Audio → Structured Semantics
 ```text
 Audio → Random Human Sentence
 ```
+
+这里还有一层容易被低估的认识论风险：即使字段改成结构化，标注员依据的往往仍是主人转述、视频画面或主观推断。那是人类把 **theory of mind** 投射到狗身上，未必等于狗的“真实语义”。后续所有对齐训练都会继承这套先验。产品上可以把它当可用的工作假说；研究与评估上必须单独检验：标注一致吗？跨品种、跨情境还稳吗？行为实验能否复现？
 
 ---
 
@@ -432,6 +456,33 @@ Semantic Prediction
 ```
 
 这一步可以直接利用现有 LLM，而没有必要重新训练一个语言模型。
+
+同时要承认：**这套 schema 本身是人类先验**。happy / anxious / walk 是否跨品种、跨情境普适，尚未被充分验证；后续对齐都建在这个假设上。工程上可以先用封闭标签集做 MVP，因为可训练、可评测、文案可控。研究上应并行一条更少人为范畴的路径：无监督离散单元发现。
+
+可以借鉴 HuBERT / wav2vec 2.0 + k-means 的做法，也和 UTA 团队在犬音素级模式上的工作、CETI 对鲸鱼发声单元的处理同构：
+
+```text
+Dog Audio
+    ↓
+SSL Encoder
+    ↓
+Clustering / Unit Discovery
+    ↓
+Acoustic Units（声学基元）
+    ↓
+与情境 / 行为做统计关联
+    ↓
+Emergent Semantics
+```
+
+产品侧可以两边并存：
+
+```text
+路径 A：人类设计的 Intent / Emotion Schema（可解释、可上线）
+路径 B：无监督声学基元 + 行为共现（少先验、可纠偏）
+```
+
+封闭 schema 负责第一版产品接口；无监督单元负责检验“我们是不是把人类范畴强加给了狗”。
 
 ---
 
@@ -519,7 +570,7 @@ Dog Vocalization
 
 ---
 
-## 十、狗叫声生成可以直接借鉴 Text-to-Audio
+## 十、狗叫声生成：从 diffusion 到 codec + 自回归
 
 今天已经有成熟的 text-to-audio generation 路线。
 
@@ -539,9 +590,7 @@ Audio Decoder
 Waveform
 ```
 
-这个框架非常适合迁移到狗叫声。
-
-我们的版本可以变成：
+这个框架可以迁移到狗叫声，作为一条可用的基线：
 
 ```text
 Human Text
@@ -559,11 +608,9 @@ Dog Vocalization
 
 需要注意的是：
 
-**我们不应该直接拿 AudioLDM 去生成狗叫。**
+**我们不应该直接拿通用 AudioLDM 权重去“开箱即用”地生成狗叫。**
 
-AudioLDM 的训练目标是通用音频生成，而我们的目标是非常特殊的 canine vocalization。
-
-更合理的做法是：
+AudioLDM 的训练目标是通用音频生成，而我们的目标是非常特殊的 canine vocalization。更合理的做法是复用成熟架构，用狗声音数据做领域适配：
 
 ```text
 通用 Audio Generation Model
@@ -575,7 +622,21 @@ AudioLDM 的训练目标是通用音频生成，而我们的目标是非常特�
       Dog Audio Generator
 ```
 
-也就是复用成熟架构，但用狗声音数据进行领域适配。
+若把生成侧选型再往前推一步，**2024–2025 更主流、也更适合个性化的路线，是 Neural Codec + 自回归 Transformer**，类似 VALL-E / AudioLM / MusicGen：
+
+```text
+Text / Semantic Condition
+        ↓
+Autoregressive / Non-AR Token Model
+        ↓
+Discrete Acoustic Tokens（EnCodec / DAC 等）
+        ↓
+Codec Decoder
+        ↓
+Waveform
+```
+
+相对 diffusion，这条路线在条件控制、训练与推理可控性，以及 **few-shot 音色克隆**（“用我家这只狗的声音”）上通常更成熟。产品若把 Personalized Dog Vocalization 当作明确目标，生成侧主路径建议优先评估 codec + 自回归；AudioLDM 类 diffusion 保留为对照与快速原型。
 
 ---
 
@@ -643,7 +704,7 @@ Generated Vocalization
 
 > “用我家狗的声音表达这句话。”
 
-这就从一个简单的 Text-to-Audio 模型，升级成了 **Personalized Dog Vocalization Generation**。
+这就从一个简单的 Text-to-Audio 模型，升级成了 **Personalized Dog Vocalization Generation**。codec + 自回归栈对这类“短参考音频 → 保持个体音色”的需求，工程路径更清晰。
 
 ---
 
@@ -716,7 +777,7 @@ Dog2vec 相关数据
 Dog Audio Encoder
 ```
 
-这一阶段基本不需要人工语义标签。
+这一阶段基本不需要人工语义标签。可同时对照 NatureLM-audio 一类跨物种生物声学基础模型的少样本适配结果。
 
 ---
 
@@ -744,7 +805,7 @@ Dog Audio
 Structured Dog Semantics
 ```
 
-这是整个项目最需要自建数据的阶段。
+并行推进无监督声学基元发现，用行为 / 情境共现做弱语义绑定。这是整个项目最需要自建数据的阶段，也是假设风险最高的阶段。
 
 ---
 
@@ -758,23 +819,7 @@ Dog Audio
 Human Description
 ```
 
-训练 audio-text contrastive alignment。
-
-可以借鉴 CLAP 的路线，把：
-
-```text
-Dog Audio
-```
-
-和：
-
-```text
-Human Language
-```
-
-映射到共享语义空间。
-
-最终实现：
+训练 audio-text alignment。可以从通用 Audio-Language Model 的 LoRA 微调起步，再视需要训练狗专属对比学习头。最终实现：
 
 ```text
 Dog Audio
@@ -798,23 +843,19 @@ Dog Semantic
 Dog Audio
 ```
 
-训练条件音频生成模型。
-
-生成过程：
+训练条件音频生成模型。主路径优先评估：
 
 ```text
 Human Text
    ↓
-Semantic
+Semantic + Identity
    ↓
-Conditioning
-   ↓
-Diffusion / Autoregressive Audio Model
+Codec Token LM
    ↓
 Dog Audio
 ```
 
-最终形成：
+diffusion 路线保留为对照。最终形成：
 
 ```text
 Dog → Human
@@ -856,7 +897,7 @@ Human Explanation
 
 > “狗说：有人来了。”
 
-更加科学。
+更加科学，也更不容易用过度拟人化误导用户。
 
 当这个系统经过真实数据验证之后，再把输出升级成自然语言：
 
@@ -920,7 +961,7 @@ Intent
 Human Description
 ```
 
-这些数据能不能建立可靠的对应关系。
+这些数据能不能建立可靠的对应关系——以及这些对应关系有多少来自狗，有多少来自人类标注者的推断。
 
 DogSpeak 解决的是：
 
@@ -934,15 +975,17 @@ Dog2vec 解决的是：
 Dog Audio Representation
 ```
 
-BEATs / CLAP 等方法解决的是：
+BEATs / CLAP / NatureLM-audio / 通用 Audio-Language Model 解决的是：
 
 ```text
 Audio Representation
 +
 Cross-modal Alignment
++
+可复用的冷启动能力
 ```
 
-AudioLDM 等方法解决的是：
+AudioLDM、以及更现代的 codec + 自回归栈解决的是：
 
 ```text
 Semantic / Text → Audio Generation
@@ -960,7 +1003,43 @@ Dog Audio ↔ Dog Meaning
 
 ---
 
-## 十七、最终我们希望得到的不是一个模型，而是一套 Dog Language Foundation Model
+## 十七、别浪费 DogSpeak 自带的视频模态
+
+DogSpeak / Dog2vec 相关数据天然来自视频。只抽音频，等于丢掉了耳朵、尾巴、姿态、场景等往往比叫声更稳定的意图线索。
+
+更划算的弱监督路径是：
+
+```text
+Video Frame / Clip
+        ↓
+VLM（视觉语言模型）
+        ↓
+情境 / 情绪 / 行为伪标签
+        ↓
+反哺 Dog Semantic Dataset
+```
+
+人工标注仍然需要，用来校准与抽检；大量初筛和候选标签可以先由 VLM 从画面生成。这比纯靠人工写 intent / emotion 便宜，也更贴近数据本身“来自 YouTube / TikTok 视频”的优势。
+
+多模态版本的语义样本可以扩成：
+
+```json
+{
+  "audio": "dog_001.wav",
+  "video": "dog_001.mp4",
+  "vlm_pseudo_labels": {
+    "context": "owner_holding_leash",
+    "posture": "tail_wagging",
+    "emotion_guess": "excited"
+  },
+  "human_verified": true,
+  "intent": "go_for_walk"
+}
+```
+
+---
+
+## 十八、最终我们希望得到的不是一个模型，而是一套 Dog Language Foundation Model
 
 最终架构可以抽象成：
 
@@ -1023,7 +1102,7 @@ Dog Identity
 
 ---
 
-## 十八、我们应该如何验证“它真的在理解狗”？
+## 十九、我们应该如何验证“它真的在理解狗”？
 
 这里必须非常谨慎。
 
@@ -1045,9 +1124,19 @@ angry
 anxious
 ```
 
-也不代表它已经完成了“翻译”。
+也不代表它已经完成了“翻译”——甚至不代表这些标签对狗成立。标签体系本身可能是人类幻觉的精致版本。
 
-因此评估应该分成三个层次。
+因此评估应该分成四个层次。
+
+第零层是 **Annotation Reliability**：
+
+```text
+标注员两两一致率
+跨品种 / 跨情境稳定性
+VLM 伪标签与人工抽检的偏差
+```
+
+如果第零层不稳，后面所有“语义准确率”都可能只是在拟合人类彼此的故事。
 
 第一层是 Acoustic Understanding：
 
@@ -1065,6 +1154,7 @@ Emotion
 Intent
 Context
 Behavior
+无监督单元与行为共现的可复现性
 ```
 
 第三层才是 Communication：
@@ -1074,9 +1164,7 @@ Dog Audio → Human Meaning
 Human Meaning → Dog Vocalization
 ```
 
-尤其第三层应该进行真实行为实验。
-
-例如：
+尤其第三层应该进行真实行为实验。这是动物沟通研究里证明“语义有效性”的黄金标准：
 
 ```text
 给狗播放生成的 vocalization
@@ -1092,7 +1180,7 @@ Human Meaning → Dog Vocalization
 
 ---
 
-## 十九、结论
+## 二十、结论
 
 因此，这个项目最合理的技术路线并不是：
 
@@ -1112,6 +1200,7 @@ Human Meaning → Dog Vocalization
                        Dog Audio Encoder
                               ↓
                     ② 狗的语义表示学习
+                         （schema + 无监督单元）
                               ↓
                        Dog Semantic Space
                               ↓
@@ -1119,15 +1208,30 @@ Human Meaning → Dog Vocalization
               ↓                               ↓
       ③ Dog → Human                    ④ Human → Dog
               ↓                               ↓
-        Language Decoder                 Audio Generator
+        Language Decoder              Codec Token LM /
+                                      Diffusion（对照）
               ↓                               ↓
           人类语言                         狗叫声
 ```
 
-其中，DogSpeak 是第一阶段非常合适的基础数据；Dog2vec 则说明“针对犬类声音做专门的自监督预训练”已经是一条有论文验证的路线；CLAP 提供了 audio-text 对齐的方法论；BEATs 提供了现代 audio SSL 的成熟范式；AudioLDM 等工作则提供了从语义条件生成音频的成熟技术路线。
+其中，DogSpeak 是第一阶段非常合适的基础数据；Dog2vec 说明犬类专用自监督预训练有论文验证的正向收益，但提升幅度有限，不宜过度解读；NatureLM-audio 提供了生物声学基础模型的对标；CLAP 与通用 Audio-Language Model（再加 LoRA）提供了跨模态对齐的冷启动路径；BEATs / HuBERT 提供了 audio SSL 与离散单元发现的成熟范式；生成侧则应同时评估 AudioLDM 类 diffusion 与更利于个性化的 codec + 自回归栈。视频模态上的 VLM 伪标签，则是构建 Dog Semantic Dataset 时性价比最高的加速器之一。
 
 所以我们真正要解决的核心问题，可以浓缩成一句话：
 
-> **不是让 AI 学会“狗叫声对应哪个中文句子”，而是先让 AI 学会狗叫声背后的可验证语义，再把这种语义连接到人类语言和狗的声音生成。**
+> **不是让 AI 学会“狗叫声对应哪个中文句子”，而是先让 AI 学会狗叫声背后可验证、且尽量少被人类范畴绑架的语义，再把这种语义连接到人类语言和狗的声音生成。**
 
 这会是一个比“狗语翻译器”更加严谨，也更加有技术含量的产品定义。
+
+---
+
+## 参考
+
+Lekhak et al., *DogSpeak: A Canine Vocalization Classification Dataset*, ACM MM 2025。数据集：[ArlingtonCL2/DogSpeak_Dataset](https://huggingface.co/datasets/ArlingtonCL2/DogSpeak_Dataset)。
+
+Li, Zhu, Wu, *Dog2vec: Self-Supervised Pre-Training for Canine Vocal Representation*, Interspeech 2025。
+
+Wang et al., *Phonetic and Lexical Discovery of Canine Vocalization*, EMNLP 2024 Findings；*Toward Automatic Discovery of a Canine Phonetic Alphabet*, ACL 2025。
+
+Chen et al., BEATs；Wu et al., CLAP；Robinson et al., NatureLM-audio / AnimalSpeak；Liu et al., AudioLDM / AudioLDM 2。
+
+通用音频–语言与生成参考：Qwen2-Audio、SALMONN、Audio Flamingo 2；AudioLM / VALL-E / MusicGen；EnCodec / DAC。

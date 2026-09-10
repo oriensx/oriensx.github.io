@@ -46,15 +46,26 @@ import { AeoGoosePracticeCover } from "./blog/aeo-goose-practice/cover";
 import { ApplePictureHeroCover } from "./blog/apple-picture-hero/cover";
 import { Expectimax2048Cover } from "./blog/2048-expectimax/cover";
 import { DogLanguageModelCover } from "./blog/dog-language-model/cover";
+import { DropCover } from "./blog/drop-publish/cover";
 
 export const posts: PostData[] = [
+  {
+    slug: "drop-publish",
+    title: "Drop 式发布：把一个 zip 变成一条子路径 URL",
+    date: "2026-09-10",
+    tag: "前端技术",
+    summary:
+      "把 zip 发布成主域子路径：inspect 与 check、路径保留名单、同步落盘与异步构建、nginx 兜底加最长前缀、常驻进程托管与命令行封装。",
+    cover: <DropCover />,
+    coverShape: "square",
+  },
   {
     slug: "dog-language-model",
     title: "从狗叫声到狗语翻译：构建一个双向 Dog Language Model",
     date: "2026-09-08",
     tag: "大模型",
     summary:
-      "以 Dog Semantic Space 为中枢，串联 DogSpeak / Dog2vec 声学预训练、CLAP 音文对齐与 AudioLDM 条件生成，分四阶段落地 Dog↔Human。",
+      "保留 Dog Semantic Space 主线，并补上 schema 风险、标注认识论、codec 自回归生成、通用音频大模型 LoRA 与视频弱监督。",
     cover: <DogLanguageModelCover />,
     coverShape: "circle",
   },
