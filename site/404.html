@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moved to logeast.cc</title>
+    <script>
+      var dest =
+        "https://logeast.cc" +
+        location.pathname +
+        location.search +
+        location.hash;
+      location.replace(dest);
+    </script>
+  </head>
+  <body>
+    <p>This page moved to <a id="to" href="https://logeast.cc/">logeast.cc</a>.</p>
+    <script>
+      document.getElementById("to").href =
+        "https://logeast.cc" +
+        location.pathname +
+        location.search +
+        location.hash;
+    </script>
+  </body>
+</html>
