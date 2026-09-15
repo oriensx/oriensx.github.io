@@ -1,4 +1,18 @@
 ---
+id: fluidify
+date: 2026-09-15
+time: 09:35
+tags: 工业, 地图, 基础设施
+url: https://www.fluidify.org/map
+---
+
+# Fluidify：正在建造的工业世界地图
+
+作者 Alex Nesovic。用地图收录已宣布的基础设施与工业项目，多数计划 2026 年后投产。覆盖百余国、上万个项目。可在图上扫工厂、集群和投资，不必从已知地点搜起。条目先由智能体铺开，再靠社区补链接、纠错或现场照片。承包商数据还不齐。
+
+![Fluidify：正在建造的工业世界地图](https://chaomei-1259670296.cos.ap-guangzhou.myqcloud.com/jobhunt/pasted-1789436152269.png)
+
+---
 id: relativity-park
 date: 2026-09-10
 time: 17:19
